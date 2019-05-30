@@ -37,7 +37,7 @@ LEFT JOIN
             WHEN ty.name='Decimal' THEN CAST(ty.scale AS VARCHAR(50))
             ELSE ''
         END AS 'Scale'
-        ,NULL AS 'ReferencedColumn'
+        ,'' AS 'ReferencedColumn'
     FROM [REPLACE].sys.tables t
     JOIN [REPLACE].sys.indexes i ON (t.object_id=i.object_id)
     JOIN [REPLACE].sys.index_columns ic ON ((i.object_id=ic.object_id)AND(i.index_id=ic.index_id))
