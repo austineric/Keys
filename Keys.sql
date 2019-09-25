@@ -1,4 +1,3 @@
-
 --Returns all tables in a database, the primary and foreign keys for those tables, the tables and columns referenced by the foreign keys, and the datatype of the columns
 --This is particularly useful when working against a linked server you can't see the relationships in
 --if running against a linked server replace all [REPLACE] with the linked server and database name like LinkedServer.Database
@@ -8,6 +7,7 @@ SELECT
     dt1.object_id AS 'ObjectID'
     ,dt1.name AS 'TableName'
     ,dt2.KeyType
+    ,dt2.KeyName
     ,dt2.ColumnName
     ,dt2.DataType
     ,dt2.max_length
@@ -26,6 +26,7 @@ LEFT JOIN
         t.object_id AS 'ObjectID'
         ,t.name AS 'TableName'
         ,'Primary' AS 'KeyType'
+        ,i.name AS 'KeyName'
         ,c.name AS 'ColumnName'
         ,ty.name AS 'DataType'
         ,ty.max_length
@@ -52,6 +53,7 @@ LEFT JOIN
         t.object_id AS 'ObjectID'
         ,t.name AS 'TableName'
         ,'Foreign' AS 'KeyType'
+        ,k.name AS 'KeyName'
         ,c.name AS 'ColumnName'
         ,ty.name AS 'DataType'
         ,ty.max_length
